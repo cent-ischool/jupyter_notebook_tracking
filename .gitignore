@@ -122,3 +122,6 @@ dmypy.json
 
 # Yarn cache
 .yarn/
+
+# MCP configuration
+mcp.json
