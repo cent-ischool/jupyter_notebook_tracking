@@ -1,11 +1,12 @@
-# jupyter_notebook_tracking
+# Jupyter Notebook Tracking
 
-[![Github Actions Status](https://github.com/example/jupyter_notebook_tracking/workflows/Build/badge.svg)](https://github.com/example/jupyter_notebook_tracking/actions/workflows/build.yml)
+A juypterlab extension to record who edited the notebook, when and for how long.
 
-Track total who edited the notebook and for how long. Juypterhub deployments only as it looks for JUPYTERHUB_USER
+Suitable for Juypterhub deployments, as it looks for JUPYTERHUB_USER.
 
-Tracking data updated on each notebook save, and stored under the `metadata.tracking` key:
+Tracking data is updated on each notebook save, then stored under the `metadata.tracking` key in the notebook's JSON:
 
+Example:
 ```
     total_edit_time_seconds: 270
     last_edit_by: mary
