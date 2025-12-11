@@ -2,7 +2,30 @@
 
 [![Github Actions Status](https://github.com/example/jupyter_notebook_tracking/workflows/Build/badge.svg)](https://github.com/example/jupyter_notebook_tracking/actions/workflows/build.yml)
 
-Track total editing time in Jupyter notebooks
+Track total who edited the notebook and for how long. Juypterhub deployments only as it looks for JUPYTERHUB_USER
+
+Tracking data updated on each notebook save, and stored under the `metadata.tracking` key:
+
+```
+    total_edit_time_seconds: 270
+    last_edit_by: mary
+    editors:
+        tom: 120
+        mary: 150
+    history:
+        - bytes: 6796
+          edit_time_seconds: 100
+          timestamp: "YYYY-MM-DDTHH:mm:ss.nnnZ"
+          user: tom
+        - bytes: 7980
+          edit_time_seconds: 20
+          timestamp: "YYYY-MM-DDTHH:mm:ss.nnnZ"
+          user: tom
+        - bytes: 12900
+          edit_time_seconds: 150
+          timestamp: "YYYY-MM-DDTHH:mm:ss.nnnZ"
+          user: mary
+```
 
 ## Requirements
 
