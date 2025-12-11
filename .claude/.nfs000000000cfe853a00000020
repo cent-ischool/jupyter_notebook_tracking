@@ -8,10 +8,7 @@
       "Bash(jlpm install:*)",
       "Bash(jlpm build:*)",
       "Bash(pip install:*)",
-      "Bash(jupyter labextension:*)",
-      "Bash(jlpm build:prod:*)",
-      "Bash(python -m build:*)",
-      "Bash(git tag:*)"
+      "Bash(jupyter labextension:*)"
     ]
   }
 }

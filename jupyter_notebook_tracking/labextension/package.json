@@ -95,7 +95,7 @@
     "extension": true,
     "outputDir": "jupyter_notebook_tracking/labextension",
     "_build": {
-      "load": "static/remoteEntry.8b23b282c48604e9fc0d.js",
+      "load": "static/remoteEntry.c48a125d93e253be4695.js",
       "extension": "./extension",
       "style": "./style"
     }
