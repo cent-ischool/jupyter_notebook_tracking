@@ -5102,9 +5102,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jupyterlab_notebook_edit_time@workspace:.":
+"jupyter_notebook_tracking@workspace:.":
   version: 0.0.0-use.local
-  resolution: "jupyterlab_notebook_edit_time@workspace:."
+  resolution: "jupyter_notebook_tracking@workspace:."
   dependencies:
     "@jupyterlab/application": ^4.0.0
     "@jupyterlab/builder": ^4.0.0

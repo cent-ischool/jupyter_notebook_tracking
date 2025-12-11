@@ -1,6 +1,6 @@
-# jupyterlab_notebook_edit_time
+# jupyter_notebook_tracking
 
-[![Github Actions Status](https://github.com/example/jupyterlab_notebook_edit_time/workflows/Build/badge.svg)](https://github.com/example/jupyterlab_notebook_edit_time/actions/workflows/build.yml)
+[![Github Actions Status](https://github.com/example/jupyter_notebook_tracking/workflows/Build/badge.svg)](https://github.com/example/jupyter_notebook_tracking/actions/workflows/build.yml)
 
 Track total editing time in Jupyter notebooks
 
@@ -13,7 +13,7 @@ Track total editing time in Jupyter notebooks
 To install the extension, execute:
 
 ```bash
-pip install jupyterlab_notebook_edit_time
+pip install jupyter_notebook_tracking
 ```
 
 ## Uninstall
@@ -21,7 +21,7 @@ pip install jupyterlab_notebook_edit_time
 To remove the extension, execute:
 
 ```bash
-pip uninstall jupyterlab_notebook_edit_time
+pip uninstall jupyter_notebook_tracking
 ```
 
 ## Contributing
@@ -36,7 +36,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jupyterlab_notebook_edit_time directory
+# Change directory to the jupyter_notebook_tracking directory
 
 # Set up a virtual environment and install package in development mode
 python -m venv .venv
@@ -72,12 +72,12 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
-pip uninstall jupyterlab_notebook_edit_time
+pip uninstall jupyter_notebook_tracking
 ```
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `jupyterlab_notebook_edit_time` within that folder.
+folder is located. Then you can remove the symlink named `jupyter_notebook_tracking` within that folder.
 
 ### Packaging the extension
 

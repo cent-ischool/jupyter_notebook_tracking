@@ -1,5 +1,5 @@
 {
-    "name": "jupyterlab_notebook_edit_time",
+    "name": "jupyter_notebook_tracking",
     "version": "0.1.0",
     "description": "Track total editing time in Jupyter notebooks",
     "keywords": [
@@ -7,9 +7,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/example/jupyterlab_notebook_edit_time",
+    "homepage": "https://github.com/example/jupyter_notebook_tracking",
     "bugs": {
-        "url": "https://github.com/example/jupyterlab_notebook_edit_time/issues"
+        "url": "https://github.com/example/jupyter_notebook_tracking/issues"
     },
     "license": "BSD-3-Clause",
     "author": "Developer",
@@ -23,7 +23,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/example/jupyterlab_notebook_edit_time.git"
+        "url": "https://github.com/example/jupyter_notebook_tracking.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
@@ -35,7 +35,7 @@
         "clean": "jlpm clean:lib",
         "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
         "clean:lintcache": "rimraf .eslintcache .stylelintcache",
-        "clean:labextension": "rimraf jupyterlab_notebook_edit_time/labextension jupyterlab_notebook_edit_time/_version.py",
+        "clean:labextension": "rimraf jupyter_notebook_tracking/labextension jupyter_notebook_tracking/_version.py",
         "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
         "eslint": "jlpm eslint:check --fix",
         "eslint:check": "eslint . --cache --ext .ts,.tsx",
@@ -93,7 +93,7 @@
     },
     "jupyterlab": {
         "extension": true,
-        "outputDir": "jupyterlab_notebook_edit_time/labextension"
+        "outputDir": "jupyter_notebook_tracking/labextension"
     },
     "eslintIgnore": [
         "node_modules",

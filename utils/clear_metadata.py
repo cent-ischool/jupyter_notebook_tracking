@@ -24,24 +24,26 @@ def main():
     if "metadata" not in notebook:
         notebook["metadata"] = {}
 
-    old_time = notebook["metadata"].get("total_edit_time_seconds", 0)
-    old_user = notebook["metadata"].get("last_edit_by", "")
-    old_editors = notebook["metadata"].get("editors", {})
+    tracking = notebook["metadata"].get("tracking", {})
+    old_time = tracking.get("total_edit_time_seconds", 0)
+    old_user = tracking.get("last_edit_by", "")
+    old_editors = tracking.get("editors", {})
+    old_history = tracking.get("history", [])
 
-    notebook["metadata"]["total_edit_time_seconds"] = 0
-    if "last_edit_by" in notebook["metadata"]:
-        del notebook["metadata"]["last_edit_by"]
-    if "editors" in notebook["metadata"]:
-        del notebook["metadata"]["editors"]
+    if "tracking" in notebook["metadata"]:
+        del notebook["metadata"]["tracking"]
 
     with open(args.path, "w", encoding="utf-8") as f:
         json.dump(notebook, f, indent=1)
 
-    print(f"Reset total_edit_time_seconds from {old_time}s to 0s")
+    print(f"Cleared tracking metadata:")
+    print(f"  total_edit_time_seconds: {old_time}s")
     if old_user:
-        print(f"Cleared last_edit_by (was: {old_user})")
+        print(f"  last_edit_by: {old_user}")
     if old_editors:
-        print(f"Cleared editors (was: {old_editors})")
+        print(f"  editors: {old_editors}")
+    if old_history:
+        print(f"  history: {len(old_history)} records")
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ requires = ["hatchling>=1.5.0", "jupyterlab>=4.0.0,<5", "hatch-nodejs-version>=0
 build-backend = "hatchling.build"
 
 [project]
-name = "jupyterlab_notebook_edit_time"
+name = "jupyter_notebook_tracking"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
@@ -33,24 +33,24 @@ source = "nodejs"
 fields = ["description", "authors", "urls", "keywords"]
 
 [tool.hatch.build.targets.sdist]
-artifacts = ["jupyterlab_notebook_edit_time/labextension"]
+artifacts = ["jupyter_notebook_tracking/labextension"]
 exclude = [".github", "binder"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlab_notebook_edit_time/labextension" = "share/jupyter/labextensions/jupyterlab_notebook_edit_time"
-"install.json" = "share/jupyter/labextensions/jupyterlab_notebook_edit_time/install.json"
+"jupyter_notebook_tracking/labextension" = "share/jupyter/labextensions/jupyter_notebook_tracking"
+"install.json" = "share/jupyter/labextensions/jupyter_notebook_tracking/install.json"
 
 [tool.hatch.build.hooks.version]
-path = "jupyterlab_notebook_edit_time/_version.py"
+path = "jupyter_notebook_tracking/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
-    "jupyterlab_notebook_edit_time/labextension/static/style.js",
-    "jupyterlab_notebook_edit_time/labextension/package.json",
+    "jupyter_notebook_tracking/labextension/static/style.js",
+    "jupyter_notebook_tracking/labextension/package.json",
 ]
-skip-if-exists = ["jupyterlab_notebook_edit_time/labextension/static/style.js"]
+skip-if-exists = ["jupyter_notebook_tracking/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
@@ -60,7 +60,7 @@ npm = ["jlpm"]
 build_cmd = "install:extension"
 npm = ["jlpm"]
 source_dir = "src"
-build_dir = "jupyterlab_notebook_edit_time/labextension"
+build_dir = "jupyter_notebook_tracking/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"

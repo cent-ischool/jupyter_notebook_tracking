@@ -47,7 +47,13 @@ In the `utils` folder
 
 ## Metadata Storage
 
-- Metadata stored in the notebook under `notebook.metadata`
-- `total_edit_time_seconds` The cumulative edit time in seconds. Accumulates across sessions - opening a notebook that already has edit time will add to the existing value.
-- `last_edit_by` The username of the last person who saved the notebook.
-- `editors` A dictionary where keys are usernames and values are their total edit time in seconds.
+All tracking data is stored under `notebook.metadata.tracking`:
+
+- `tracking.total_edit_time_seconds` The cumulative edit time in seconds. Accumulates across sessions - opening a notebook that already has edit time will add to the existing value.
+- `tracking.last_edit_by` The username of the last person who saved the notebook.
+- `tracking.editors` A dictionary where keys are usernames and values are their total edit time in seconds.
+- `tracking.history` An array of records appended on each save. Each record contains:
+  - `timestamp`: ISO 8601 timestamp of when the save occurred
+  - `user`: Username of who saved the file
+  - `bytes`: Size of the notebook file in bytes at the time of save
+  - `edit_time_seconds`: Time in seconds since the last save (or notebook open)

@@ -7,9 +7,29 @@ import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
 
 import { PageConfig } from '@jupyterlab/coreutils';
 
-const TOTAL_EDIT_TIME_KEY = 'total_edit_time_seconds';
-const LAST_EDIT_BY_KEY = 'last_edit_by';
-const EDITORS_KEY = 'editors';
+const TRACKING_KEY = 'tracking';
+
+/**
+ * A history record entry saved on each notebook save.
+ */
+interface HistoryRecord {
+  timestamp: string;
+  user: string;
+  bytes: number;
+  edit_time_seconds: number;
+  [key: string]: string | number;
+}
+
+/**
+ * The tracking metadata structure stored under notebook.metadata.tracking
+ */
+interface TrackingMetadata {
+  total_edit_time_seconds: number;
+  last_edit_by?: string;
+  editors: Record<string, number>;
+  history: HistoryRecord[];
+  [key: string]: string | number | Record<string, number> | HistoryRecord[] | undefined;
+}
 
 /**
  * Track editing time for a single notebook panel.
@@ -61,28 +81,41 @@ class NotebookEditTimeTracker {
     const now = Date.now();
     const elapsedSeconds = Math.floor((now - this._sessionStartTime) / 1000);
 
-    // Get current edit time from metadata, default to 0
+    // Get current tracking metadata, or initialize with defaults
     const metadata = model.sharedModel.metadata;
-    const currentTotalEditTime = (metadata[TOTAL_EDIT_TIME_KEY] as number) || 0;
+    const tracking: TrackingMetadata = (metadata[TRACKING_KEY] as TrackingMetadata) || {
+      total_edit_time_seconds: 0,
+      editors: {},
+      history: []
+    };
 
     // Add elapsed time to total
-    const newTotalEditTime = currentTotalEditTime + elapsedSeconds;
-
-    // Update total edit time metadata
-    model.sharedModel.setMetadata(TOTAL_EDIT_TIME_KEY, newTotalEditTime);
+    tracking.total_edit_time_seconds += elapsedSeconds;
 
     // Get the current user from JUPYTERHUB_USER (available via hubUser in PageConfig)
     const hubUser = PageConfig.getOption('hubUser');
     if (hubUser) {
       // Set last_edit_by
-      model.sharedModel.setMetadata(LAST_EDIT_BY_KEY, hubUser);
+      tracking.last_edit_by = hubUser;
 
       // Update editors dictionary with per-user edit time
-      const editors = (metadata[EDITORS_KEY] as Record<string, number>) || {};
-      const userEditTime = editors[hubUser] || 0;
-      editors[hubUser] = userEditTime + elapsedSeconds;
-      model.sharedModel.setMetadata(EDITORS_KEY, editors);
+      const userEditTime = tracking.editors[hubUser] || 0;
+      tracking.editors[hubUser] = userEditTime + elapsedSeconds;
     }
+
+    // Append a history record
+    const notebookContent = JSON.stringify(model.sharedModel.toJSON());
+    const byteSize = new TextEncoder().encode(notebookContent).length;
+    const historyRecord: HistoryRecord = {
+      timestamp: new Date().toISOString(),
+      user: hubUser || 'unknown',
+      bytes: byteSize,
+      edit_time_seconds: elapsedSeconds
+    };
+    tracking.history.push(historyRecord);
+
+    // Save the tracking metadata
+    model.sharedModel.setMetadata(TRACKING_KEY, tracking);
 
     // Reset session start time to now (so we track time since last save)
     this._sessionStartTime = now;
@@ -90,16 +123,16 @@ class NotebookEditTimeTracker {
 }
 
 /**
- * Initialization data for the jupyterlab_notebook_edit_time extension.
+ * Initialization data for the jupyter_notebook_tracking extension.
  */
 const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyterlab_notebook_edit_time:plugin',
+  id: 'jupyter_notebook_tracking:plugin',
   description: 'Track total editing time in Jupyter notebooks',
   autoStart: true,
   requires: [INotebookTracker],
   activate: (app: JupyterFrontEnd, notebookTracker: INotebookTracker) => {
     console.log(
-      'JupyterLab extension jupyterlab_notebook_edit_time is activated!'
+      'JupyterLab extension jupyter_notebook_tracking is activated!'
     );
 
     // Track edit time for each notebook that is opened

@@ -41,9 +41,11 @@ def main():
 
 
     metadata = notebook.get("metadata", {})
-    total_edit_time = metadata.get("total_edit_time_seconds", 0)
-    last_edit_by = metadata.get("last_edit_by", "")
-    editors = metadata.get("editors", {})
+    tracking = metadata.get("tracking", {})
+    total_edit_time = tracking.get("total_edit_time_seconds", 0)
+    last_edit_by = tracking.get("last_edit_by", "")
+    editors = tracking.get("editors", {})
+    history = tracking.get("history", [])
     formatted_time = format_time(total_edit_time)
 
     print(f"total_edit_time_seconds: {total_edit_time}s / {formatted_time}")
@@ -54,6 +56,10 @@ def main():
             print(f"  {user}: {seconds}s / {format_time(seconds)}")
     else:
         print("  (none)")
+    print(f"history: {len(history)} records")
+    if history:
+        for record in history:
+            print(f"  {record['timestamp']} - {record['user']}: {record['bytes']} bytes, {record['edit_time_seconds']}s")
 
 
 if __name__ == "__main__":

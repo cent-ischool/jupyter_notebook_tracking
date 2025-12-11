@@ -7,9 +7,9 @@ has_ai_rules: false
 has_binder: false
 has_settings: false
 kind: frontend
-labextension_name: jupyterlab_notebook_edit_time
+labextension_name: jupyter_notebook_tracking
 project_short_description: Track total editing time in Jupyter notebooks
-python_name: jupyterlab_notebook_edit_time
-repository: https://github.com/example/jupyterlab_notebook_edit_time
+python_name: jupyter_notebook_tracking
+repository: https://github.com/example/jupyter_notebook_tracking
 test: false
 
