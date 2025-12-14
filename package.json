@@ -1,6 +1,6 @@
 {
     "name": "jupyter_notebook_tracking",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Track total editing time in Jupyter notebooks",
     "keywords": [
         "jupyter",
